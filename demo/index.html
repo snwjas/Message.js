@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Message.js</title>
+</head>
+
+<body>
+	<script>
+		var language = navigator.appName === 'Netscape'
+			? navigator.language : navigator.browserLanguage;
+		if (language.indexOf('zh') > -1) {
+			window.location.href = 'index-zh.html';
+		} else {
+			window.location.href = 'index-en.html';
+		}
+	</script>
+</body>
+
+</html>

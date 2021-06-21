@@ -1,0 +1,122 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Message.js</title>
+	<link rel="stylesheet" href="./message.min.css">
+	<script src="./message.min.js"></script>
+	<style>
+		.box {
+			margin-top: 300px;
+			text-align: center;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="box">
+		<div class="types">
+			<button class="btn" data-type='info'>info</button>
+			<button class="btn" data-type='error'>error</button>
+			<button class="btn" data-type='success'>success</button>
+			<button class="btn" data-type='warning'>warning</button>
+			<button class="btn" data-type='loading'>loading(Manual off by default)</button>
+		</div>
+		<div class="settings" style="margin-top: 50px;">
+			<button class="auto-close">Auto close</button>
+			<button class="manually-close">Manual close</button>
+			<button class="show-close">Show close</button>
+			<button class="hide-close">Hide close</button>
+			<button class="close-all">Close all</button>
+		</div>
+		<div class="settings" style="margin-top: 50px;">
+			<button class="create-loading">Create a loading</button>
+			<button class="close-loading">Close the loading</button>
+		</div>
+		<div class="position" style="margin-top: 50px;">
+			<button class="set-position" data-position="left">show...left</button>
+			<button class="set-position" data-position="center">show...middle</button>
+			<button class="set-position" data-position="right">show...right</button>
+		</div>
+	</div>
+	<script>
+		var $types = document.querySelector(".types");
+		var btns = $types.querySelectorAll(".btn");
+		for (var i = 0, btn; btn = btns[i]; i++) {
+			btn.addEventListener("click", function (e) {
+				var type = this.getAttribute("data-type");
+				var txt = this.innerText;
+				Qmsg[type](txt);
+			})
+		}
+
+		var $position = document.querySelector(".position");
+		var $pos = $position.querySelectorAll(".set-position");
+		for (var i = 0, botn; botn = $pos[i]; i++) {
+			botn.addEventListener("click", function (e) {
+				var position = this.getAttribute("data-position");
+				var txt = this.innerText;
+				Qmsg.config({
+					position: position
+				})
+				Qmsg.info('<i style="color:red">' + txt + '</i>', {
+					html: true
+				})
+			})
+		}
+
+		document.querySelector(".auto-close").onclick = function () {
+			Qmsg.config({
+				autoClose: true
+			})
+			Qmsg.warning('Set <i style="color:green">autoClose</i> = <i style="color:red">true</i>', {
+				html: true
+			})
+		}
+
+		document.querySelector(".manually-close").onclick = function () {
+			Qmsg.config({
+				autoClose: false,
+				showClose: true
+			})
+			Qmsg.warning('Set <i style="color:green">autoClose</i> = <i style="color:red">false</i>', {
+				html: true
+			})
+		}
+
+		document.querySelector(".show-close").onclick = function () {
+			Qmsg.config({
+				showClose: true
+			})
+			Qmsg.warning('Set <i style="color:green">showClose</i> = <i style="color:red">true</i>', {
+				html: true
+			})
+		}
+		document.querySelector(".hide-close").onclick = function () {
+			Qmsg.config({
+				showClose: false
+			})
+			Qmsg.warning('Set <i style="color:green">showClose</i> = <i style="color:gray">false</i>', {
+				html: true
+			})
+		}
+		document.querySelector(".close-all").onclick = function () {
+			Qmsg.closeAll();
+		}
+		var loading;
+		document.querySelector(".create-loading").onclick = function () {
+			loading = Qmsg.loading("Duck, swim and swim~", {
+				onClose: function () {
+					console.log("The duckling swam ashore~")
+				}
+			});
+		}
+		document.querySelector(".close-loading").onclick = function () {
+			loading && loading.close();
+		}
+	</script>
+</body>
+
+</html>
