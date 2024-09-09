@@ -176,7 +176,7 @@
 		oMsg.settings = Object.assign({}, DEFAULTS, opts || {});
 		oMsg.id = Qmsg.instanceCount;
 		var timeout = oMsg.settings.timeout;
-		timeout = timeout && parseInt(timeout >= 0) && parseInt(timeout) <= Math.NEGATIVE_INFINITY ? parseInt(timeout) : DEFAULTS.timeout;
+		timeout = timeout && parseInt(timeout) >= 0 ? parseInt(timeout) : DEFAULTS.timeout;
 		oMsg.timeout = timeout;
 		oMsg.settings.timeout = timeout;
 		oMsg.timer = null;
